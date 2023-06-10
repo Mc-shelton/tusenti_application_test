@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Expose the desired port
-EXPOSE 8000
+EXPOSE 8001
 
 # Start the server
 CMD ["npm", "test"]
