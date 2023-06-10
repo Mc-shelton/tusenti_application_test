@@ -1,25 +1,9 @@
 import { Client } from "pg";
+
 export const dbConnection = new Client({
-    user:'postgres',
-    host:'localhost',
-    database:'testdb',
-    password:'Shelton.?',
-    port : 5432
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: parseInt(process.env.DB_PORT || "5432"),
 })
-
-// const query = `
-// CREATE TABLE users(
-//     email varchar,
-//     firstName varchar,
-//     lastName varchar,
-//     age int
-// );`
-
-// client.query(query,(err,res)=>{
-//     if(err){
-//         console.error(err)
-//         return
-//     }
-//     console.log('table is created succ')
-//     client.end()
-// })

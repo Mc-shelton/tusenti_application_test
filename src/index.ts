@@ -21,10 +21,15 @@ app.use('/',router())
 
 const server = http.createServer(app)
 const PORT = process.env.PORT
-
+try{
+  
 server.listen(PORT,()=>{
-  console.log('app running on port ', PORT)
+  console.log('app running on port here', PORT)
 })
+}catch{
+  console.log(('app could not run'))
+}
+
 try{
 dbConnection.connect()
 console.log('db connected')

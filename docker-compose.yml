@@ -1,0 +1,31 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  init-db:
+    image: postgres
+    command: >
+      bash -c "
+      while ! pg_isready -h db -p 5432 -U tusenti -d tusenti_db; do
+        echo 'Waiting for the database to be available...'
+        sleep 1
+      done"
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Shelton.?
+      - POSTGRES_DB=testdb
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d # Mount the initialization scripts directory
